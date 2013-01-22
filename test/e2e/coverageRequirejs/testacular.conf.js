@@ -13,7 +13,7 @@ exclude = [
 ];
 
 autoWatch = true;
-browsers = ['Chrome'];
+browsers = [{ name: 'Chrome' }];
 singleRun = false;
 
 reporters = ['progress', 'coverage'];

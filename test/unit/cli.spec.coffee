@@ -56,9 +56,9 @@ describe 'cli', ->
       expect(options.logLevel).to.equal constant.LOG_WARN
 
 
-    it 'should parse browsers into an array', ->
+    it 'should parse browsers into an array of records', ->
       options = processArgs ['--browsers', 'Chrome,ChromeCanary,Firefox']
-      expect(options.browsers).to.deep.equal ['Chrome', 'ChromeCanary', 'Firefox']
+      expect(options.browsers).to.deep.equal [{ name: 'Chrome' }, { name: 'ChromeCanary' }, { name: 'Firefox' }]
 
 
     it 'should resolve configFile to absolute path', ->

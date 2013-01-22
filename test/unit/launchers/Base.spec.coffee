@@ -74,6 +74,13 @@ describe 'launchers Base', ->
       expect(browser._start).to.have.been.calledWith '/capture/url?id=123'
 
 
+    it 'should use the command-line arguments passed in from config', ->
+      browser = new m.BaseBrowser 123, null, 0, 1, { name: 'Chrome', args: ['--user-data-dir=$TEMPDIR', '--country=CA', '$URL'], cmd: '/usr/local/bin/chrome' }
+
+      browser.start '/here'
+      expect(mockSpawn).to.have.been.calledWith '/usr/local/bin/chrome', ['--user-data-dir=/tmp/testacular-123', '--country=CA', '/here?id=123']
+
+
   describe 'kill', ->
     it 'should just fire done if already killed', (done) ->
       browser = new m.BaseBrowser 123, new events.EventEmitter, 0, 1 # disable retry
