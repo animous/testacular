@@ -8,7 +8,7 @@ exclude = [];
 
 autoWatch = true;
 
-browsers = [{ name: 'Chrome' }];
+browsers = ['Chrome'];
 
 preprocessors = {
   '**/*.coffee': 'coffee'

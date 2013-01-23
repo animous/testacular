@@ -9,5 +9,5 @@ exclude = [
 ];
 
 autoWatch = true;
-browsers = [{ name: 'Chrome' }];
+browsers = ['Chrome'];
 singleRun = false;
