@@ -46,7 +46,7 @@ describe 'config', ->
         'config4.js': fsMock.file 0, 'port = 123; autoWatch = true; basePath = "/abs/base"'
         'config5.js': fsMock.file 0, 'port = {f: __filename, d: __dirname}' # piggyback on port prop
         'config6.js': fsMock.file 0, 'reporters = "junit";'
-        'config7.js': fsMock.file 0, 'browsers = ["Chrome", "Firefox"];'
+        'config7.js': fsMock.file 0, 'browsers = ["Chrome", {name: "Firefox"}];'
       conf:
         'invalid.js': fsMock.file 0, '={function'
         'exclude.js': fsMock.file 0, 'exclude = ["one.js", "sub/two.js"];'
@@ -142,9 +142,16 @@ describe 'config', ->
 
     it 'should override config with cli options, but not deep merge', ->
       # regression https://github.com/vojtajina/testacular/issues/283
-      config = e.parseConfig '/home/config7.js', {browsers: ['Safari']}
+      config = e.parseConfig '/home/config7.js', {browsers: [{name: 'Safari'}]}
 
-      expect(config.browsers).to.deep.equal ['Safari']
+      expect(config.browsers).to.deep.equal [{name: 'Safari'}]
+
+
+    it 'should normalize browser configurations', ->
+      # features https://github.com/testacular/testacular/issues/278
+      config = e.parseConfig '/home/config7.js', {}
+
+      expect(config.browsers).to.deep.equal [{name: "Chrome"}, {name: "Firefox"}]
 
 
     it 'should resolve files and excludes to overriden basePath from cli', ->
