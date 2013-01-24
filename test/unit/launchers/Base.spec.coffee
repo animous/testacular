@@ -75,10 +75,10 @@ describe 'launchers Base', ->
 
 
     it 'should use the command-line arguments passed in from config', ->
-      browser = new m.BaseBrowser 123, null, 0, 1, { name: 'Chrome', args: ['--user-data-dir=$TEMPDIR', '--country=CA', '$URL'], cmd: '/usr/local/bin/chrome' }
+      browser = new m.BaseBrowser 123, null, 0, 1, { name: 'Chrome', args: ['--user-data-dir=$TEMPDIR', '--country=CA'], cmd: '/usr/local/bin/chrome' }
 
       browser.start '/here'
-      expect(mockSpawn).to.have.been.calledWith '/usr/local/bin/chrome', ['--user-data-dir='+path.normalize('/tmp/testacular-123'), '--country=CA', '/here?id=123']
+      expect(mockSpawn).to.have.been.calledWith '/usr/local/bin/chrome', ['/here?id=123', '--user-data-dir='+path.normalize('/tmp/testacular-123'), '--country=CA']
 
 
   describe 'kill', ->
